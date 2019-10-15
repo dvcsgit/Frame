@@ -1,0 +1,10 @@
+﻿@model PFG.QisQualityControl.Web.ViewModels.AccountGridListViewModel
+@{
+    Layout = null;
+}
+@using (Ajax.BeginForm("Query", null, AjaxUtils.GetAjaxOptions(), new { @id = "criteria-form" }))
+{
+    @Html.HiddenFor(x=>x.Parameters.NotesID)
+    @Html.HiddenFor(x=>x.Parameters.PageNo)
+    @Html.HiddenFor(x=>x.Parameters.PageSize)
+}

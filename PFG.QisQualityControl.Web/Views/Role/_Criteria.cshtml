@@ -1,0 +1,8 @@
+﻿@model PFG.QisQualityControl.Web.ViewModels.RoleListViewModel
+@{
+    Layout = null;
+}
+@using (Ajax.BeginForm("Query", null ,AjaxUtils.GetAjaxOptions(),new { @id = "criteria-form" }))
+{
+    @Html.HiddenFor(y => y.Parameter.RoleName)
+}

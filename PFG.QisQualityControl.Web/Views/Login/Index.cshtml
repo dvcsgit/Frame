@@ -1,0 +1,135 @@
+﻿@model PFG.QisQualityControl.Web.ViewModels.LoginViewModel
+@{
+    var title = Configuration.AppSettings("SystemTitle");
+    Layout = "~/Views/Shared/_LayoutSingle.cshtml";
+    var returnUrl = ViewBag.ReturnUrl;
+}
+
+<div class="login-container">
+    <div class="center">
+        <h1>
+            @title
+        </h1>
+    </div>
+
+    <div class="space-6"></div>
+
+    <div class="position-relative">
+        <div id="login-box" class="login-box visible widget-box no-border">
+            <div class="widget-body">
+                <div class="widget-main">
+                    <h4 class="header blue lighter bigger">
+                        人員登入
+                    </h4>
+
+                    <div class="space-6"></div>
+                    @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { @id = "form-login", @class = "form-horizontal" }))
+                    {
+                        @Html.ValidationSummary(true, "登入失敗. 請修正以下的錯誤後，再試一次.")
+                        <fieldset>
+                            <label class="block clearfix">
+                                <span class="block input-icon input-icon-right">
+                                    @Html.TextBoxFor(x => x.Account, new { @class = "form-control", placeholder = "請輸入員工號", @autofocus = ViewBag.IsAutoFocus, @autocomplete = "off" })
+                                    @Html.ValidationMessageFor(x => x.Account, "", new { @class = "text-danger" })
+                                    <i class="ace-icon fa fa-user"></i>
+                                </span>
+                            </label>
+
+                            <label class="block clearfix">
+                                <span class="block input-icon input-icon-right">
+                                    @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "請輸入密碼", @autocomplete = "off" })
+                                    @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
+                                    <i class="ace-icon fa fa-lock"></i>
+                                </span>
+                            </label>
+
+                            <div class="space"></div>
+
+                            <div class="clearfix">
+                                <label class="inline">
+                                    <input type="checkbox" class="ace" name="RememberMe" value="true">
+                                    <span class="lbl"> 記住我的帳號</span>
+                                </label>
+                                <input type="hidden" name="RememberMe" value="false" />
+
+                                <button id="btn-login" type="button" class="width-35 pull-right btn btn-sm btn-primary" data-loading-text="登入中...請稍後">
+                                    <i class="ace-icon fa fa-key"></i>
+                                    <span class="bigger-110">登入</span>
+                                </button>
+                            </div>
+
+                            <div class="space-4"></div>
+                        </fieldset>
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("requestUrl", Request.QueryString["RequestUrl"])
+                    }
+                </div><!-- /.widget-main -->
+
+                <div class="toolbar clearfix">
+
+                </div>
+            </div><!-- /.widget-body -->
+        </div><!-- /.login-box -->
+
+
+
+    </div><!-- /.position-relative -->
+
+
+</div>
+
+@section Scripts {
+    <script>
+
+        $(function () {
+
+            function Login() {
+                $("#btn-login").trigger("click");
+            }
+
+            $("#form-login").keypress(function (event) {
+                if (event.keyCode == '13') {
+                    Login();
+                }
+            });
+
+
+            $(document).on('click', '.toolbar a[data-target]', function (e) {
+                e.preventDefault();
+                var target = $(this).data('target');
+                $('.widget-box.visible').removeClass('visible');//hide others
+                $(target).addClass('visible');//show target
+            });
+
+            $("#btn-login").click(function (e) {
+                $(".alert-message").remove();
+                var btn = $(this);
+                var $form = $("#form-login");
+                if (!$form.valid || $form.valid()) {
+                    btn.button('loading');
+                    $.post($form.attr('action'), $form.serializeArray())
+                        .done(function (json) {
+                            var json = json || {};
+                            if (json.success) {
+                                location.href = json.returnUrl;
+                            } else if (json.errors) {
+                                commonjs.displayErrors($form, json.errors, true);
+
+                            }
+                            btn.button('reset');
+                        })
+                        .fail(function () {
+                            btn.button('reset');
+                        });
+
+
+                }
+
+
+                e.preventDefault();
+            });
+        });
+
+    </script>
+}
+

@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QIS_NEWModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Operations">
+    <Key>
+      <PropertyRef Name="OperationID" />
+    </Key>
+    <Property Name="OperationID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PermissionOperations" Relationship="Self.FK_dbo_PermissionOperations_dbo_Operations_OperationId" FromRole="Operations" ToRole="PermissionOperations" />
+  </EntityType>
+  <EntityType Name="PermissionOperations">
+    <Key>
+      <PropertyRef Name="PermissionOperationID" />
+    </Key>
+    <Property Name="PermissionOperationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PermissionID" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="OperationID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Operations" Relationship="Self.FK_dbo_PermissionOperations_dbo_Operations_OperationId" FromRole="PermissionOperations" ToRole="Operations" />
+    <NavigationProperty Name="Permissions" Relationship="Self.FK_dbo_PermissionOperations_dbo_Permissions_PermissionId" FromRole="PermissionOperations" ToRole="Permissions" />
+    <NavigationProperty Name="Roles" Relationship="Self.RolePermissionOperations" FromRole="PermissionOperations" ToRole="Roles" />
+  </EntityType>
+  <EntityType Name="Permissions">
+    <Key>
+      <PropertyRef Name="PermissionID" />
+    </Key>
+    <Property Name="PermissionID" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ParentID" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="PermissionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Area" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="Controller" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Action" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Weight" Type="Int32" Nullable="false" />
+    <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Icon" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="IsVisible" Type="Boolean" Nullable="false" />
+    <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="PermissionOperations" Relationship="Self.FK_dbo_PermissionOperations_dbo_Permissions_PermissionId" FromRole="Permissions" ToRole="PermissionOperations" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsDefault" Type="Boolean" Nullable="false" />
+    <Property Name="CreatorAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifierAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DateModified" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="PermissionOperations" Relationship="Self.RolePermissionOperations" FromRole="Roles" ToRole="PermissionOperations" />
+    <NavigationProperty Name="Users" Relationship="Self.UserRoles" FromRole="Roles" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Account" />
+    </Key>
+    <Property Name="Account" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateLastLogin" Type="DateTime" Precision="3" />
+    <Property Name="DateLastActivity" Type="DateTime" Precision="3" />
+    <Property Name="Tel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Ext" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+    <Property Name="CreatorAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifierAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DateModified" Type="DateTime" Precision="3" />
+    <Property Name="Dept" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="IsCheckAccount" Type="Boolean" />
+    <Property Name="NotesID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Fac_ID" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="Class_ID" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Roles" Relationship="Self.UserRoles" FromRole="Users" ToRole="Roles" />
+  </EntityType>
+  <Association Name="FK_dbo_PermissionOperations_dbo_Operations_OperationId">
+    <End Role="Operations" Type="Self.Operations" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PermissionOperations" Type="Self.PermissionOperations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Operations">
+        <PropertyRef Name="OperationID" />
+      </Principal>
+      <Dependent Role="PermissionOperations">
+        <PropertyRef Name="OperationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_PermissionOperations_dbo_Permissions_PermissionId">
+    <End Role="Permissions" Type="Self.Permissions" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PermissionOperations" Type="Self.PermissionOperations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Permissions">
+        <PropertyRef Name="PermissionID" />
+      </Principal>
+      <Dependent Role="PermissionOperations">
+        <PropertyRef Name="PermissionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RolePermissionOperations">
+    <End Role="PermissionOperations" Type="Self.PermissionOperations" Multiplicity="*" />
+    <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
+  </Association>
+  <Association Name="UserRoles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="QIS_NEWEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Operations" EntityType="Self.Operations" />
+    <EntitySet Name="PermissionOperations" EntityType="Self.PermissionOperations" />
+    <EntitySet Name="Permissions" EntityType="Self.Permissions" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <AssociationSet Name="FK_dbo_PermissionOperations_dbo_Operations_OperationId" Association="Self.FK_dbo_PermissionOperations_dbo_Operations_OperationId">
+      <End Role="Operations" EntitySet="Operations" />
+      <End Role="PermissionOperations" EntitySet="PermissionOperations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_PermissionOperations_dbo_Permissions_PermissionId" Association="Self.FK_dbo_PermissionOperations_dbo_Permissions_PermissionId">
+      <End Role="Permissions" EntitySet="Permissions" />
+      <End Role="PermissionOperations" EntitySet="PermissionOperations" />
+    </AssociationSet>
+    <AssociationSet Name="RolePermissionOperations" Association="Self.RolePermissionOperations">
+      <End Role="PermissionOperations" EntitySet="PermissionOperations" />
+      <End Role="Roles" EntitySet="Roles" />
+    </AssociationSet>
+    <AssociationSet Name="UserRoles" Association="Self.UserRoles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

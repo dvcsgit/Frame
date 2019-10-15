@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QIS_NEWModelStoreContainer" CdmEntityContainer="QIS_NEWEntities">
+    <EntitySetMapping Name="Operations">
+      <EntityTypeMapping TypeName="IsTypeOf(QIS_NEWModel.Operations)">
+        <MappingFragment StoreEntitySet="Operations">
+          <ScalarProperty Name="OperationID" ColumnName="OperationID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PermissionOperations">
+      <EntityTypeMapping TypeName="IsTypeOf(QIS_NEWModel.PermissionOperations)">
+        <MappingFragment StoreEntitySet="PermissionOperations">
+          <ScalarProperty Name="PermissionOperationID" ColumnName="PermissionOperationID" />
+          <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+          <ScalarProperty Name="OperationID" ColumnName="OperationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Permissions">
+      <EntityTypeMapping TypeName="IsTypeOf(QIS_NEWModel.Permissions)">
+        <MappingFragment StoreEntitySet="Permissions">
+          <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="PermissionName" ColumnName="PermissionName" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="Controller" ColumnName="Controller" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+          <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="IsTypeOf(QIS_NEWModel.Roles)">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+          <ScalarProperty Name="CreatorAccount" ColumnName="CreatorAccount" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="ModifierAccount" ColumnName="ModifierAccount" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(QIS_NEWModel.Users)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Account" ColumnName="Account" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="DateLastLogin" ColumnName="DateLastLogin" />
+          <ScalarProperty Name="DateLastActivity" ColumnName="DateLastActivity" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="Ext" ColumnName="Ext" />
+          <ScalarProperty Name="CreatorAccount" ColumnName="CreatorAccount" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="ModifierAccount" ColumnName="ModifierAccount" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="Dept" ColumnName="Dept" />
+          <ScalarProperty Name="IsCheckAccount" ColumnName="IsCheckAccount" />
+          <ScalarProperty Name="NotesID" ColumnName="NotesID" />
+          <ScalarProperty Name="Fac_ID" ColumnName="Fac_ID" />
+          <ScalarProperty Name="Class_ID" ColumnName="Class_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="RolePermissionOperations" TypeName="QIS_NEWModel.RolePermissionOperations" StoreEntitySet="RolePermissionOperations">
+      <EndProperty Name="PermissionOperations">
+        <ScalarProperty Name="PermissionOperationID" ColumnName="PermissionOperations_PermissionOperationID" />
+      </EndProperty>
+      <EndProperty Name="Roles">
+        <ScalarProperty Name="RoleID" ColumnName="Roles_RoleID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserRoles" TypeName="QIS_NEWModel.UserRoles" StoreEntitySet="UserRoles">
+      <EndProperty Name="Roles">
+        <ScalarProperty Name="RoleID" ColumnName="Roles_RoleID" />
+      </EndProperty>
+      <EndProperty Name="Users">
+        <ScalarProperty Name="Account" ColumnName="Users_Account" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

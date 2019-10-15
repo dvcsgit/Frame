@@ -1,0 +1,63 @@
+﻿@model PFG.QisQualityControl.Web.ViewModels.ProfileViewModel
+@{
+    Layout = null;
+}
+<div class="modal-header">
+    <button class="close" data-dismiss="modal"></button>
+    <h4>個人資訊</h4>
+</div>
+<div class="modal-body">
+    @using (Html.BeginForm("Edit", "Profile", FormMethod.Post, new
+    {
+        @id = "save-form",
+        @class = "form-horizontal prettyprint"
+    }))
+    {
+        <fieldset>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Account, new { @class = "col-sm-2 control-label no-padding-right" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(x => x.Account, new { @class = "input-sm", @readonly = "readonly" })
+                </div>
+                <div class="col-sm-offset-6"></div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Name, new { @class = "col-sm-2 control-label no-padding-right" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(x => x.Name, new { @class = "input-sm" })
+                    <br />
+                    @Html.ValidationMessageFor(x => x.Name)
+                </div>
+                <div class="col-sm-offset-6"></div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Email, new { @class = "col-sm-2 control-label no-padding-right" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(x => x.Email, new { @class = "input-sm" })
+                    <br />
+                    @Html.ValidationMessageFor(x => x.Email)
+                </div>
+                <div class="col-sm-offset-6"></div>
+            </div>
+        </fieldset>
+        @Html.AntiForgeryToken()
+    }
+</div>
+<div class="modal-footer">
+    <a class="btn btn-primary btn-save">儲存</a>
+    <a class="btn" data-dismiss="modal">關閉</a>
+</div>
+
+<script type="text/javascript">
+    $(function (e) {
+        //表單處理
+        $("#save-form").submit(function () {
+            $('#showDialog').modal('hide');
+        }, commonjs.formSubmitHandler);
+        //儲存
+        $(".btn-save").click(function (e) {
+            $("#save-form").submit();
+            e.preventDefault();
+        });
+    });
+</script>

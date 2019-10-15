@@ -1,0 +1,109 @@
+﻿@model PFG.QisQualityControl.Web.ViewModels.AccountGridListViewModel
+@{
+    var title = Menu.GetPageTitle(HttpContext.Current);
+    UserModel userModel = ViewBag.UserModel;
+}
+
+@section BreadCrumbs{
+    <div class="breadcrumbs" id="breadcrumbs">
+    <script type="text/javascript">
+                    try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+    </script>
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="@Url.Action("Index")">系統管理</a>
+        </li>
+        <li class="active">@title</li>
+    </ul><!-- /.breadcrumb -->
+</div>
+    }
+
+@section PageHeader{
+    }
+<div class="item-default" id="item-index">
+    <h3 class="header smaller lighter blue">@title</h3>
+    <p>
+        @if (userModel.Operation.HasFlag(EnumOperation.Query))
+        {
+            <button id="queryBtn" class="btn btn-success btn-bold">
+                <i class="ace-icon fa fa-search bigger-120"></i>
+                查詢
+            </button>
+
+        }
+
+        @if (userModel.Operation.HasFlag(EnumOperation.Create))
+        {
+            <button id="createBtn" class="btn btn-success btn-bold">
+                <i class="ace-icon fa fa-plus-circle bigger-120"></i>
+                新增
+            </button>
+        }
+    </p>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 widget-container-col ui-sortable">
+            <!-- #section:custom/widget-box -->
+            <div class="widget-box ui-sortable-handle">
+                <div class="widget-header">
+                    <h5 class="widget-title">查詢條件</h5>
+                </div>
+                <div class="widget-body">
+                    <div class="widget-main">
+                        @using (Ajax.BeginForm("Query", null, AjaxUtils.GetAjaxOptions(), new { @id = "query-form" }))
+                        {
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    @Html.LabelFor(x => x.Parameters.NotesID)
+                                </div>
+                                <div class="col-xs-4">
+                                    @Html.TextBoxFor(x => x.Parameters.NotesID, new { @class = "input-medium", @placeholder = "Notes ID" })
+                                </div>
+                                <div class="col-xs-2">
+                                    @Html.LabelFor(x=>x.Parameters.DisplayName)
+                                </div>
+                                <div class="col-xs-4">
+                                    @Html.TextBoxFor(x => x.Parameters.DisplayName, new { @class="input-medium",@placeholder="用戶名" })
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- /section:custom/widget-box -->
+            <hr />
+            <div id="divGridView">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="item-detail" style="display:none">
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+
+            //Query
+            $("#queryBtn").click(function (e) {
+                $("#query-form").submit();
+                e.preventDefault();
+            });
+
+            //Create
+            $("#createBtn").click(function (e) {
+                $(this).goToNextPage("@Url.Action("Create")");
+                e.preventDefault();
+            });
+            //Invoke
+            //$("#queryBtn").trigger("click");
+        });
+
+
+    </script>
+
+}

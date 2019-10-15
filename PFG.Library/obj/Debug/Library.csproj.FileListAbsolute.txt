@@ -1,0 +1,10 @@
+E:\Workspace\通用框架(必成)\Frame\PFG.Library\bin\Debug\PFG.Library.dll
+E:\Workspace\通用框架(必成)\Frame\PFG.Library\bin\Debug\PFG.Library.pdb
+E:\Workspace\通用框架(必成)\Frame\PFG.Library\bin\Debug\Newtonsoft.Json.dll
+E:\Workspace\通用框架(必成)\Frame\PFG.Library\bin\Debug\Newtonsoft.Json.pdb
+E:\Workspace\通用框架(必成)\Frame\PFG.Library\bin\Debug\Newtonsoft.Json.xml
+E:\Workspace\通用框架(必成)\Frame\PFG.Library\obj\Debug\Library.csprojAssemblyReference.cache
+E:\Workspace\通用框架(必成)\Frame\PFG.Library\obj\Debug\Library.csproj.CoreCompileInputs.cache
+E:\Workspace\通用框架(必成)\Frame\PFG.Library\obj\Debug\Library.csproj.CopyComplete
+E:\Workspace\通用框架(必成)\Frame\PFG.Library\obj\Debug\PFG.Library.dll
+E:\Workspace\通用框架(必成)\Frame\PFG.Library\obj\Debug\PFG.Library.pdb

@@ -1,0 +1,110 @@
+﻿@{
+
+    Layout = null;
+    var menu = Menu.GetSubMenu(HttpContext.Current);
+    //左邊側欄
+    string currentController = Request.RequestContext.RouteData.Values["controller"].ToString();
+    string homeClass = currentController == "Home" ? "active" : "";
+    string debugClass = currentController == "UploadLog" ? "active open hsub" : "hsub";
+}
+<div id="sidebar" class="sidebar responsive ace-save-state">
+    <script type="text/javascript">
+        try { ace.settings.loadState('sidebar') } catch (e) { }
+    </script>
+
+    @*<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+
+            <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+                <div>
+                    <button class="btn btn-success btn-lg">
+                        <i class="ace-icon fa fa-cogs">目前所在工程: Test工程</i>
+                    </button>
+                </div>
+            </div>
+
+
+        </div>*@
+    <!-- /.sidebar-shortcuts -->
+    <!-- #.nav-list -->
+    <ul class="nav nav-list" id="main-menu">
+        <li class="@homeClass">
+            <a href="@Url.Action("Index","Home",new { area = "" })"><i class="menu-icon fa fa-home"></i><span class="menu-text"> 首頁</span></a>
+        </li>
+
+        @foreach (var item in menu)
+        {
+            var topMenu = item.Value;
+            if (topMenu.Childrens.Count > 0)
+            {
+                <text>
+                    <li class="@topMenu.ClassName">
+                        <a href=" #" class="dropdown-toggle">
+                            <i class="menu-icon fa @topMenu.Icon"></i>
+                            <span class="menu-text">@topMenu.Name </span>
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+                        <ul class="submenu">
+                            @foreach (var subMenu in topMenu.Childrens)
+                            {
+                                if (!string.IsNullOrEmpty(subMenu.Url))
+                                {
+                                    <li class="@subMenu.ClassName">
+                                        <a href="@string.Format("{0}{1}",Url.Action(subMenu.Action, subMenu.Controller ),subMenu.Url) " >
+                                            <i class="icon-double-angle-right"></i>
+                                            @subMenu.Name
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="@subMenu.ClassName">
+                                        <a href="@Url.Action(subMenu.Action, subMenu.Controller)">
+                                            <i class="icon-double-angle-right"></i>
+                                            @subMenu.Name
+                                        </a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </li>
+
+                </text>
+            }
+            else
+            {
+                if (topMenu.Action == "#" || topMenu.Controller == "#")
+                {
+                    <text>
+                        <li class="@topMenu.ClassName"><a href="#">@topMenu.Name</a></li>
+                    </text>
+                }
+                else
+                {
+                    <text>
+                        <li class="@topMenu.ClassName"><a href="@Url.Action(topMenu.Action, topMenu.Controller)"><i class="@topMenu.Icon"></i> @topMenu.Name</a></li>
+                    </text>
+                }
+            }
+
+
+
+        }
+
+
+
+
+
+
+    </ul>
+
+
+    <!-- /.nav-list -->
+    <!-- #section:basics/sidebar.layout.minimize -->
+    <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+        <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+    </div>
+
+    <!-- /section:basics/sidebar.layout.minimize -->
+</div>
+
+

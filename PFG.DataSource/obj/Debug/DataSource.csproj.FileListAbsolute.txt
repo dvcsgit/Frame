@@ -1,0 +1,14 @@
+E:\Workspace\通用框架(必成)\Frame\PFG.DataSource\bin\Debug\PFG.DataSource.dll.config
+E:\Workspace\通用框架(必成)\Frame\PFG.DataSource\bin\Debug\PFG.DataSource.dll
+E:\Workspace\通用框架(必成)\Frame\PFG.DataSource\bin\Debug\PFG.DataSource.pdb
+E:\Workspace\通用框架(必成)\Frame\PFG.DataSource\bin\Debug\EntityFramework.dll
+E:\Workspace\通用框架(必成)\Frame\PFG.DataSource\bin\Debug\EntityFramework.SqlServer.dll
+E:\Workspace\通用框架(必成)\Frame\PFG.DataSource\bin\Debug\EntityFramework.xml
+E:\Workspace\通用框架(必成)\Frame\PFG.DataSource\bin\Debug\EntityFramework.SqlServer.xml
+E:\Workspace\通用框架(必成)\Frame\PFG.DataSource\bin\Debug\zh-Hans\EntityFramework.resources.dll
+E:\Workspace\通用框架(必成)\Frame\PFG.DataSource\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+E:\Workspace\通用框架(必成)\Frame\PFG.DataSource\obj\Debug\DataSource.csprojAssemblyReference.cache
+E:\Workspace\通用框架(必成)\Frame\PFG.DataSource\obj\Debug\DataSource.csproj.CoreCompileInputs.cache
+E:\Workspace\通用框架(必成)\Frame\PFG.DataSource\obj\Debug\DataSource.csproj.CopyComplete
+E:\Workspace\通用框架(必成)\Frame\PFG.DataSource\obj\Debug\PFG.DataSource.dll
+E:\Workspace\通用框架(必成)\Frame\PFG.DataSource\obj\Debug\PFG.DataSource.pdb

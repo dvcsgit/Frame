@@ -1,0 +1,50 @@
+﻿<div class="error-container">
+    <div class="well">
+        <h1 class="grey lighter smaller">
+            <span class="blue bigger-125">
+                <i class="ace-icon fa fa-exclamation-circle"></i>
+
+            </span>
+            該項不存在或已被刪除
+        </h1>
+
+        <hr>
+        <h3 class="lighter smaller">
+            返回
+            <i class="ace-icon fa fa-wrench icon-animated-wrench bigger-125"></i>
+            重試
+        </h3>
+
+        <div class="space"></div>
+
+
+        <hr>
+        <div class="space"></div>
+
+        <div class="center">
+            <a class="btn btn-grey" id="btn-cancel">
+                <i class="ace-icon fa fa-arrow-left"></i>
+                返回
+            </a>
+
+            <a href="@Url.Action("Index","Home")" class="btn btn-primary" id="btn-home">
+                <i class="ace-icon fa fa-home"></i>
+                首頁
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(function () {
+
+
+        //取消
+        $("#btn-cancel").click(function (e) {
+            commonjs.goBack();
+            e.preventDefault();
+        });
+    });
+</script>

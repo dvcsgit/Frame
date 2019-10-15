@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Operations">
+    <Key>
+      <PropertyRef Name="OperationID" />
+    </Key>
+    <Property Name="OperationID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="PermissionOperations">
+    <Key>
+      <PropertyRef Name="PermissionOperationID" />
+    </Key>
+    <Property Name="PermissionOperationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PermissionID" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="OperationID" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Permissions">
+    <Key>
+      <PropertyRef Name="PermissionID" />
+    </Key>
+    <Property Name="PermissionID" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="ParentID" Type="nvarchar" MaxLength="5" />
+    <Property Name="PermissionName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Area" Type="nvarchar" MaxLength="64" />
+    <Property Name="Controller" Type="nvarchar" MaxLength="50" />
+    <Property Name="Action" Type="nvarchar" MaxLength="50" />
+    <Property Name="Weight" Type="int" Nullable="false" />
+    <Property Name="Url" Type="nvarchar" MaxLength="50" />
+    <Property Name="Icon" Type="nvarchar" MaxLength="20" />
+    <Property Name="IsVisible" Type="bit" Nullable="false" />
+    <Property Name="IsEnabled" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RolePermissionOperations">
+    <Key>
+      <PropertyRef Name="PermissionOperations_PermissionOperationID" />
+      <PropertyRef Name="Roles_RoleID" />
+    </Key>
+    <Property Name="PermissionOperations_PermissionOperationID" Type="int" Nullable="false" />
+    <Property Name="Roles_RoleID" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="IsDefault" Type="bit" Nullable="false" />
+    <Property Name="CreatorAccount" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="ModifierAccount" Type="nvarchar" MaxLength="20" />
+    <Property Name="DateModified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserRoles">
+    <Key>
+      <PropertyRef Name="Roles_RoleID" />
+      <PropertyRef Name="Users_Account" />
+    </Key>
+    <Property Name="Roles_RoleID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Users_Account" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Account" />
+    </Key>
+    <Property Name="Account" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="200" />
+    <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="DateLastLogin" Type="datetime" />
+    <Property Name="DateLastActivity" Type="datetime" />
+    <Property Name="Tel" Type="nvarchar" MaxLength="20" />
+    <Property Name="Ext" Type="nvarchar" MaxLength="6" />
+    <Property Name="CreatorAccount" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="ModifierAccount" Type="nvarchar" MaxLength="20" />
+    <Property Name="DateModified" Type="datetime" />
+    <Property Name="Dept" Type="nvarchar" MaxLength="20" />
+    <Property Name="IsCheckAccount" Type="bit" />
+    <Property Name="NotesID" Type="nvarchar" MaxLength="20" />
+    <Property Name="Fac_ID" Type="nvarchar" MaxLength="1" />
+    <Property Name="Class_ID" Type="nvarchar" MaxLength="1" />
+  </EntityType>
+  <Association Name="FK_dbo_PermissionOperations_dbo_Operations_OperationId">
+    <End Role="Operations" Type="Self.Operations" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PermissionOperations" Type="Self.PermissionOperations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Operations">
+        <PropertyRef Name="OperationID" />
+      </Principal>
+      <Dependent Role="PermissionOperations">
+        <PropertyRef Name="OperationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_PermissionOperations_dbo_Permissions_PermissionId">
+    <End Role="Permissions" Type="Self.Permissions" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PermissionOperations" Type="Self.PermissionOperations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Permissions">
+        <PropertyRef Name="PermissionID" />
+      </Principal>
+      <Dependent Role="PermissionOperations">
+        <PropertyRef Name="PermissionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RolePermissionOperations_PermissionOperations">
+    <End Role="PermissionOperations" Type="Self.PermissionOperations" Multiplicity="1" />
+    <End Role="RolePermissionOperations" Type="Self.RolePermissionOperations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PermissionOperations">
+        <PropertyRef Name="PermissionOperationID" />
+      </Principal>
+      <Dependent Role="RolePermissionOperations">
+        <PropertyRef Name="PermissionOperations_PermissionOperationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RolePermissionOperations_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="RolePermissionOperations" Type="Self.RolePermissionOperations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="RolePermissionOperations">
+        <PropertyRef Name="Roles_RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRoles_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="Roles_RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRoles_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Account" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="Users_Account" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TestModelStoreContainer">
+    <EntitySet Name="Operations" EntityType="Self.Operations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PermissionOperations" EntityType="Self.PermissionOperations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Permissions" EntityType="Self.Permissions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RolePermissionOperations" EntityType="Self.RolePermissionOperations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_dbo_PermissionOperations_dbo_Operations_OperationId" Association="Self.FK_dbo_PermissionOperations_dbo_Operations_OperationId">
+      <End Role="Operations" EntitySet="Operations" />
+      <End Role="PermissionOperations" EntitySet="PermissionOperations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_PermissionOperations_dbo_Permissions_PermissionId" Association="Self.FK_dbo_PermissionOperations_dbo_Permissions_PermissionId">
+      <End Role="Permissions" EntitySet="Permissions" />
+      <End Role="PermissionOperations" EntitySet="PermissionOperations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RolePermissionOperations_PermissionOperations" Association="Self.FK_RolePermissionOperations_PermissionOperations">
+      <End Role="PermissionOperations" EntitySet="PermissionOperations" />
+      <End Role="RolePermissionOperations" EntitySet="RolePermissionOperations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RolePermissionOperations_Roles" Association="Self.FK_RolePermissionOperations_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="RolePermissionOperations" EntitySet="RolePermissionOperations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRoles_Roles" Association="Self.FK_UserRoles_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRoles_Users" Association="Self.FK_UserRoles_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

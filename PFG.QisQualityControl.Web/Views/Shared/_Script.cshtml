@@ -1,0 +1,96 @@
+﻿@{
+    //置放在頁面下端 為了讀取速度
+}
+
+
+<!-- basic scripts -->
+<!--[if !IE]> -->
+<script src="@Url.Content("~/Content/ace/components/jquery/dist/jquery.min.js")"></script>
+<!-- <![endif]-->
+<!--[if IE]>
+    <script src="@Url.Content("~/Content/ace/components/jquery.1x/dist/jquery.min.js")"></script>
+<![endif]-->
+
+
+<script type="text/javascript">
+	if ('ontouchstart' in document.documentElement) document.write("<script src='@Url.Content("~/Content/ace/components/_mod/jquery.mobile.custom/jquery.mobile.custom.js")'>" + "<" + "/script>");
+</script>
+<script src="@Url.Content("~/Content/ace/components/bootstrap/dist/js/bootstrap.js")"></script>
+
+<!--[if lte IE 8]>
+  <script src="../components/ExplorerCanvas/excanvas.js"></script>
+<![endif]-->
+<script src="@Url.Content("~/Content/ace/components/_mod/jquery-ui.custom/jquery-ui.custom.js")"></script>
+<script src="@Url.Content("~/Content/ace/components/jqueryui-touch-punch/jquery.ui.touch-punch.js")"></script>
+<script src="@Url.Content("~/Content/ace/components/_mod/easypiechart/jquery.easypiechart.js")"></script>
+<script src="@Url.Content("~/Content/ace/components/jquery.sparkline/index.js")"></script>
+<script src="@Url.Content("~/Content/ace/components/Flot/jquery.flot.js")"></script>
+<script src="@Url.Content("~/Content/ace/components/Flot/jquery.flot.pie.js")"></script>
+<script src="@Url.Content("~/Content/ace/components/Flot/jquery.flot.resize.js")"></script>
+
+
+
+
+<!-- ace scripts -->
+<script src="@Url.Content("~/Content/ace/assets/js/src/elements.scroller.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/src/elements.colorpicker.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/src/elements.fileinput.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/src/elements.typeahead.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/src/elements.wysiwyg.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/src/elements.spinner.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/src/elements.treeview.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/src/elements.wizard.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/src/elements.aside.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/src/ace.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/src/ace.basics.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/src/ace.scrolltop.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/src/ace.ajax-content.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/src/ace.touch-drag.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/src/ace.sidebar.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/src/ace.sidebar-scroll-1.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/src/ace.submenu-hover.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/src/ace.widget-box.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/src/ace.settings.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/src/ace.settings-rtl.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/src/ace.settings-skin.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/src/ace.widget-on-reload.js")"></script>
+<script src="@Url.Content("~/Content/ace/assets/js/src/ace.searchbox-autocomplete.js")"></script>
+
+
+
+
+<!-- unobtrusive -->
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+
+<!--select2-->
+<script src="@Url.Content("~/Content/ace/components/select2.v3/select2.min.js")"></script>
+<script src="@Url.Content("~/Content/ace/components/select2.v3/select2_locale_zh-TW.js")"></script>
+
+
+<!--datepicker-->
+<script src="@Url.Content("~/Content/ace/components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js")"></script>
+<script src="@Url.Content("~/Content/ace/components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.zh-TW.min.js")"></script>
+
+
+<!-- custom js -->
+<script src="@Url.Content("~/Scripts/integrated.js")"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $(".profile").click(function (e) {
+            var link = $(this);
+            var url = link.attr("href");
+            commonjs.loadAndShowDialog(link, url);
+            e.preventDefault();
+        });
+    });
+</script>
+
+
+
+
+
+
+
